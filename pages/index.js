@@ -84,12 +84,6 @@ const Index = () => (
     <Footer>
       everpaper.io &mdash; Built with &hearts; using IPFS in Berlin and Zurich.
     </Footer>
-    <style jsx global>{`
-      body {
-        margin: 0;
-        padding: 0;
-      }
-    `}</style>
   </Layout>
 );
 
