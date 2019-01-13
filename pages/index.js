@@ -76,7 +76,7 @@ const Index = () => (
     <H2>Keep your daily journals</H2>
 
     <a href="https://pavelsvitek.typeform.com/to/vYmp4s" target="_blank">
-      <Button>Sign up &#10230;</Button>
+      <Button>Get early access &#10230;</Button>
     </a>
     <p>Sign up for early access in March 2019</p>
     {/* <p>Launching Mar 2019</p> */}
