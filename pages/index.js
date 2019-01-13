@@ -1,6 +1,5 @@
 import * as css from '../shared/css';
 import Head from 'next/head';
-import Link from 'next/link';
 import styled from 'styled-components';
 
 const Layout = styled.div`
@@ -40,6 +39,10 @@ const H2 = styled.h2`
   font-weight: 100;
   font-family: 'Dancing Script';
   margin: 10px 0;
+
+  @media only screen and (max-width: ${css.SM}) {
+    font-size: 40px;
+  }
 `;
 
 const Button = styled.div`
@@ -63,14 +66,14 @@ const Index = () => (
     <H1>everPaper.io</H1>
     <H2>Keep your daily journals</H2>
 
-    <a href="https://typeform.com" target="_blank">
-      <Button>Sign up</Button>
+    <a href="https://pavelsvitek.typeform.com/to/vYmp4s" target="_blank">
+      <Button>Sign up &#10230;</Button>
     </a>
     <p>Sign up for early access</p>
     {/* <p>Launching Mar 2019</p> */}
 
     <Footer>
-      everpaper.io &copy; Build with &hearts; using IPFS in Berlin and Zurich.
+      everpaper.io &mdash; Built with &hearts; using IPFS in Berlin and Zurich.
     </Footer>
     <style jsx global>{`
       body {
