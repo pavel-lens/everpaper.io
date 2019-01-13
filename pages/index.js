@@ -11,6 +11,7 @@ const Layout = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
 `;
 
 const Wrapper = styled.div`
@@ -48,14 +49,22 @@ const H2 = styled.h2`
 const Button = styled.div`
   display: inline-block;
   background-color: ${css.secondaryColor}
-  border: 1px solid ${css.primaryColor};
   color: ${css.primaryColor};
   padding: 15px 55px;
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
   margin-top: 50px;
+  margin-left: 0px;
   cursor: pointer;
+
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 2px;
+  transition: all ease-in;
+  transition-duration: 0.2s;
+
+  &:hover {
+    box-shadow: rgba(80, 80, 80, 0.4) 6px 6px 5px;
+  }
 `;
 
 const Index = () => (
@@ -63,7 +72,7 @@ const Index = () => (
     <Head>
       <title>everPaper - own your daily journals</title>
     </Head>
-    <H1>everPaper.io</H1>
+    <H1>everpaper.io</H1>
     <H2>Keep your daily journals</H2>
 
     <a href="https://pavelsvitek.typeform.com/to/vYmp4s" target="_blank">
