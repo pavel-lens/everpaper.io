@@ -2,14 +2,13 @@ import Document, { Head, Main, NextScript } from 'next/document';
 import styled, { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
-  static getInitialProps({ req, renderPage }) {
+  static getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet();
-    const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
     const page = renderPage(App => props =>
       sheet.collectStyles(<App {...props} />)
     );
     const styleTags = sheet.getStyleElement();
-    return { ...page, userAgent, styleTags };
+    return { ...page, styleTags };
   }
 
   render() {
