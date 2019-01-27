@@ -6,16 +6,19 @@ const Layout = styled.div`
   height: 100vh;
   background-color: ${css.primaryColor};
   font-family: ${css.primaryFont};
-  color: ${css.primaryFontColor};
+  color: #eee;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+  /* justify-content: center; */
+  background-image: ${css.primaryGradient};
 `;
 
 const Wrapper = styled.div`
-  padding: 25px 50px;
+  margin-top: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Footer = styled.div`
@@ -26,7 +29,7 @@ const Footer = styled.div`
   font-weight: 100;
   font-size: 0.8em;
   text-align: center;
-  padding: 10px 0;
+  padding: 6px 0;
 `;
 
 const H1 = styled.h1`
@@ -58,28 +61,29 @@ const Button = styled.div`
   margin-left: 0px;
   cursor: pointer;
 
-  box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 2px;
+  box-shadow: ${css.shadowElevated};
   transition: all ease-in;
   transition-duration: 0.2s;
 
   &:hover {
-    box-shadow: rgba(80, 80, 80, 0.4) 6px 6px 5px;
+    box-shadow: ${css.shadowElevated2X};
   }
 `;
 
 const Index = () => (
   <Layout>
     <Head>
-      <title>everPaper - own your daily journals</title>
+      <title>everpaper - keep your daily journals</title>
     </Head>
-    <H1>everpaper.io</H1>
-    <H2>Keep your daily journals</H2>
+    <Wrapper>
+      <H1>everpaper.io</H1>
+      <H2>Keep your daily journals</H2>
 
-    <a href="https://pavelsvitek.typeform.com/to/vYmp4s" target="_blank">
-      <Button>Get early access &#10230;</Button>
-    </a>
-    <p>Sign up for early access in March 2019</p>
-    {/* <p>Launching Mar 2019</p> */}
+      <a href="https://pavelsvitek.typeform.com/to/vYmp4s" target="_blank">
+        <Button>Get early access &#10230;</Button>
+      </a>
+      <p>Sign up for early access in March 2019</p>
+    </Wrapper>
 
     <Footer>
       everpaper.io &mdash; Built with &hearts; using IPFS in Berlin and Zurich.
