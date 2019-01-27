@@ -1,6 +1,8 @@
-import * as css from '../shared/css';
 import Head from 'next/head';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+
+import * as css from '../shared/css';
 
 const Layout = styled.div`
   height: 100vh;
@@ -94,6 +96,13 @@ const Button = styled.div`
   }
 `;
 
+const Toolbar = styled.div`
+  display: flex;
+  flexwrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const StoryPreview = styled.div`
   font-size: 16px;
   line-height: 24px;
@@ -118,60 +127,73 @@ const Story = props => (
   </StoryWrapper>
 );
 
-const LoginPage = () => (
-  <Layout>
-    <Head>
-      <title>everpaper - keep your daily journals</title>
-    </Head>
-    <Top />
-    <Wrapper>
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <H1>Your papers</H1>
-        <Button>Write a paper</Button>
-      </div>
-      {/* <H2>Keep your daily journals</H2> */}
-      <Story title="Saturday at park">
-        <StoryPreview>
-          Today we went to park with my wife and our doggie Mia. Both were
-          excited as it was a beautiful autumn day, the sun was shinning and
-          the..
-        </StoryPreview>
-        <StoryFooter>
-          Last edited about 1 month ago · 1 min read (40 words) so far
-        </StoryFooter>
-      </Story>
-      <Story title="Intense day at work">
-        <StoryPreview>
-          The day started slowly with my usual coffee howoever things soon
-          turned to opposite direction..
-        </StoryPreview>
-        <StoryFooter>
-          Last edited about 1 month ago · 1 min read (40 words) so far
-        </StoryFooter>
-      </Story>
-      <Story title="Afternoon drinks with friends">
-        <StoryPreview>
-          Today we went to park with my wife and our doggie Mia. Both were
-          excited as it was a beautiful autumn day, the sun was shinning and
-          the..
-        </StoryPreview>
-        <StoryFooter>
-          Last edited about 1 month ago · 1 min read (40 words) so far
-        </StoryFooter>
-      </Story>
-    </Wrapper>
+const Page = props => {
+  console.log('State:', props.papers);
 
-    <Footer>
-      everpaper.io &mdash; Built with &hearts; using IPFS in Berlin and Zurich.
-    </Footer>
-  </Layout>
-);
+  return (
+    <Layout>
+      <Head>
+        <title>everpaper - keep your daily journals</title>
+      </Head>
+      <Top />
+      <Wrapper>
+        <Toolbar>
+          <H1>Your papers</H1>
+          <Button>Write a paper</Button>
+        </Toolbar>
+        {/* <H2>Keep your daily journals</H2> */}
+        <Story title="Saturday at park">
+          <StoryPreview>
+            Today we went to park with my wife and our doggie Mia. Both were
+            excited as it was a beautiful autumn day, the sun was shinning and
+            the..
+          </StoryPreview>
+          <StoryFooter>
+            Last edited about 1 month ago · 1 min read (40 words) so far
+          </StoryFooter>
+        </Story>
+        <Story title="Intense day at work">
+          <StoryPreview>
+            The day started slowly with my usual coffee howoever things soon
+            turned to opposite direction..
+          </StoryPreview>
+          <StoryFooter>
+            Last edited about 1 month ago · 1 min read (40 words) so far
+          </StoryFooter>
+        </Story>
+        <Story title="Afternoon drinks with friends">
+          <StoryPreview>
+            Today we went to park with my wife and our doggie Mia. Both were
+            excited as it was a beautiful autumn day, the sun was shinning and
+            the..
+          </StoryPreview>
+          <StoryFooter>
+            Last edited about 1 month ago · 1 min read (40 words) so far
+          </StoryFooter>
+        </Story>
+      </Wrapper>
 
-export default LoginPage;
+      <Footer>
+        everpaper.io &mdash; Built with &hearts; using IPFS in Berlin and
+        Zurich.
+      </Footer>
+    </Layout>
+  );
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
+}
+
+function mapStateToProps(state) {
+  return {
+    papers: state.global.papers,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Page);
