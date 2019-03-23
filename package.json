@@ -14,6 +14,7 @@
   "author": "Pavel Svitek",
   "license": "ISC",
   "dependencies": {
+    "@rematch/core": "^1.1.0",
     "@zeit/next-css": "^1.0.1",
     "draft-js": "^0.10.5",
     "draft-js-buttons": "^2.0.1",
