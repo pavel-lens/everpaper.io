@@ -1,48 +1,13 @@
 import React, { Component } from 'react';
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
-import { ContentState, EditorState, RichUtils } from 'draft-js';
-import styled, { createGlobalStyle } from 'styled-components';
-import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
+import { ContentState, EditorState, RichUtils, convertFromRaw, convertToRaw } from 'draft-js';
+import styled from 'styled-components';
 
+import GlobalDraftJSStyle from './GlobalDraftJSStyle';
+import InlineToolbar, { inlineToolbarPlugin } from './Toolbar';
 import defaultText from './defaultText';
 
-// Inline toolbar
-import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
-const inlineToolbarPlugin = createInlineToolbarPlugin();
-const { InlineToolbar } = inlineToolbarPlugin;
-
 const plugins = [inlineToolbarPlugin];
-
-const GlobalDraftJSStyle = createGlobalStyle`
-  .public-DraftEditor-content {
-    min-height: 100vh !important;
-
-    /* Source Serif Pro config */
-    /* font-family: 'Source Serif Pro', serif;
-    font-size: 19px;
-    line-height: 1.38; */
-
-    /* Tinos config */
-    font-family: 'Tinos', serif;
-    font-size: 20px;
-    font-weight: regular;
-    line-height: 1.48;
-    letter-spacing: .01em;
-
-    /* Roboto Slab config */
-    /* font-family: 'Roboto Slab', serif;
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 1.58; */
-    /* letter-spacing: .005em; */
-
-    color: rgba(0,0,0,.84);
-
-    & div[data-block="true"] {
-      margin: 20px 0;
-    }
-  }
-`;
 
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -54,11 +19,12 @@ export default class DraftJSEditor extends Component {
   constructor(props) {
     super(props);
     this.state = { editorState: createEditorStateWithText(defaultText) };
-    this.onChange = editorState => this.setState({ editorState });
+    this.onChange = (editorState) => this.setState({ editorState });
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
   }
 
   handleKeyCommand(command, editorState) {
+    console.log('handleKeyCommand');
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
       this.onChange(newState);
@@ -67,7 +33,10 @@ export default class DraftJSEditor extends Component {
     return 'not-handled';
   }
 
-  onChange = editorState => {
+  onChange = (editorState) => {
+    console.log('onChange');
+
+    console.log(convertToRaw(editorState));
     this.setState({
       editorState,
     });
