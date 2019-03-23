@@ -34,10 +34,8 @@ const Wrapper = styled.div`
 `;
 
 const Footer = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  width: 100%;
+  margin-top: auto;
   font-weight: 100;
   font-size: 0.8em;
   text-align: center;
@@ -52,17 +50,6 @@ const H1 = styled.h1`
   margin: 0;
   font-family: ${css.secondaryFont};
   margin-bottom: 20px;
-`;
-
-const H2 = styled.h2`
-  font-size: 46px;
-  font-weight: 100;
-  font-family: 'Dancing Script';
-  margin: 10px 0;
-
-  @media only screen and (max-width: ${css.SM}) {
-    font-size: 40px;
-  }
 `;
 
 const H3 = styled.h3`
@@ -128,7 +115,31 @@ const Story = props => (
 );
 
 const Page = props => {
-  console.log('State:', props.papers);
+  const { dispatch, papers } = props;
+  console.log('Papers:', papers);
+
+  const handleAddNewPaper = () => {
+    dispatch({
+      type: 'ADD_NEW_PAPER',
+      payload: {
+        title: `New paper ${new Date()}`,
+        content: `Today we wrote a new paper at ${new Date()}`,
+        created: new Date(),
+        edited: new Date(),
+      },
+    });
+  };
+
+  const createStoryId = title => title.toLowerCase().replace('', '-');
+
+  const storiesNodes = papers.map(p => (
+    <Story key={createStoryId(p.title)} title={p.title}>
+      <StoryPreview>{p.content}</StoryPreview>
+      <StoryFooter>
+        Last edited about 1 month ago · 1 min read (40 words) so far
+      </StoryFooter>
+    </Story>
+  ));
 
   return (
     <Layout>
@@ -139,38 +150,9 @@ const Page = props => {
       <Wrapper>
         <Toolbar>
           <H1>Your papers</H1>
-          <Button>Write a paper</Button>
+          <Button onClick={handleAddNewPaper}>Write a paper</Button>
         </Toolbar>
-        {/* <H2>Keep your daily journals</H2> */}
-        <Story title="Saturday at park">
-          <StoryPreview>
-            Today we went to park with my wife and our doggie Mia. Both were
-            excited as it was a beautiful autumn day, the sun was shinning and
-            the..
-          </StoryPreview>
-          <StoryFooter>
-            Last edited about 1 month ago · 1 min read (40 words) so far
-          </StoryFooter>
-        </Story>
-        <Story title="Intense day at work">
-          <StoryPreview>
-            The day started slowly with my usual coffee howoever things soon
-            turned to opposite direction..
-          </StoryPreview>
-          <StoryFooter>
-            Last edited about 1 month ago · 1 min read (40 words) so far
-          </StoryFooter>
-        </Story>
-        <Story title="Afternoon drinks with friends">
-          <StoryPreview>
-            Today we went to park with my wife and our doggie Mia. Both were
-            excited as it was a beautiful autumn day, the sun was shinning and
-            the..
-          </StoryPreview>
-          <StoryFooter>
-            Last edited about 1 month ago · 1 min read (40 words) so far
-          </StoryFooter>
-        </Story>
+        {storiesNodes}
       </Wrapper>
 
       <Footer>
@@ -189,7 +171,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    papers: state.global.papers,
+    papers: state.papers.list,
   };
 }
 
