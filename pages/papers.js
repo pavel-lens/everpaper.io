@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-
+import store, { withRematch } from '../src/store';
 import * as css from '../shared/css';
 
 const Layout = styled.div`
@@ -107,37 +106,32 @@ const StoryWrapper = styled.div`
   padding: 20px 0;
 `;
 
-const Story = props => (
+const Story = (props) => (
   <StoryWrapper>
     <H3>{props.title}</H3>
     {props.children}
   </StoryWrapper>
 );
 
-const Page = props => {
+const Page = (props) => {
   const { dispatch, papers } = props;
   console.log('Papers:', papers);
 
   const handleAddNewPaper = () => {
-    dispatch({
-      type: 'ADD_NEW_PAPER',
-      payload: {
-        title: `New paper ${new Date()}`,
-        content: `Today we wrote a new paper at ${new Date()}`,
-        created: new Date(),
-        edited: new Date(),
-      },
+    props.onAddPaper({
+      title: `New paper ${new Date()}`,
+      content: `Today we wrote a new paper at ${new Date()}`,
+      created: new Date(),
+      edited: new Date(),
     });
   };
 
-  const createStoryId = title => title.toLowerCase().replace('', '-');
+  const createStoryId = (title) => title.toLowerCase().replace('', '-');
 
-  const storiesNodes = papers.map(p => (
+  const storiesNodes = papers.map((p) => (
     <Story key={createStoryId(p.title)} title={p.title}>
       <StoryPreview>{p.content}</StoryPreview>
-      <StoryFooter>
-        Last edited about 1 month ago · 1 min read (40 words) so far
-      </StoryFooter>
+      <StoryFooter>Last edited about 1 month ago · 1 min read (40 words) so far</StoryFooter>
     </Story>
   ));
 
@@ -155,10 +149,7 @@ const Page = props => {
         {storiesNodes}
       </Wrapper>
 
-      <Footer>
-        everpaper.io &mdash; Built with &hearts; using IPFS in Berlin and
-        Zurich.
-      </Footer>
+      <Footer>everpaper.io &mdash; Built with &hearts; using IPFS in Berlin and Zurich.</Footer>
     </Layout>
   );
 };
@@ -166,6 +157,7 @@ const Page = props => {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    onAddPaper: (paper) => dispatch.papers.addPaper(paper),
   };
 }
 
@@ -175,7 +167,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Page);
+export default withRematch(store, mapStateToProps, mapDispatchToProps)(Page);

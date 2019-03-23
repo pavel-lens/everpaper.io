@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import store, { withRematch } from '../src/store';
 import dynamic from 'next/dynamic';
 const NoSSREditor = dynamic(() => import('../src/components/Editor'), { ssr: false });
 // import Editor from '../src/components/Editor';
@@ -99,14 +99,14 @@ const StoryWrapper = styled.div`
   padding: 20px 0;
 `;
 
-const Story = props => (
+const Story = (props) => (
   <StoryWrapper>
     <H3>{props.title}</H3>
     {props.children}
   </StoryWrapper>
 );
 
-const Page = props => {
+const Page = (props) => {
   const { dispatch } = props;
 
   return (
@@ -138,7 +138,4 @@ function mapStateToProps(state) {
   return {};
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Page);
+export default withRematch(store, mapStateToProps, mapDispatchToProps)(Page);
