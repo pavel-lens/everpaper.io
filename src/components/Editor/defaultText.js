@@ -1,0 +1,3 @@
+export default `If you are in the crypto space, you are probably very sceptical when reading about yet another “great ICO” you should invest to or about “the next BIG thing” in crypto. And you should be.
+The fact is that crypto market plummeted in last year and a lot of individual investors sold their portfolio in panic at the end of 2018. There was a lot of scam ICOs, millions of dollars worth of crypto was stolen from exchanges and decentralized apps had hard time getting a widespread adoption.
+These are hard times for crypto markets but you have to realize that the blockchain technology is in its infancy. Markets will continue to swing up and down but in next 20 years the blockchain technology will represent one of the biggest opportunity to be part of.`;
