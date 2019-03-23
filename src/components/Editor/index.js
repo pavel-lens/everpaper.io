@@ -1,26 +1,17 @@
 import React, { Component } from 'react';
 import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
 import { ContentState, EditorState, RichUtils } from 'draft-js';
-// import createHashtagPlugin from 'draft-js-hashtag-plugin';
-// import createLinkifyPlugin from 'draft-js-linkify-plugin';
 import styled, { createGlobalStyle } from 'styled-components';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 
 import defaultText from './defaultText';
-
-// const hashtagPlugin = createHashtagPlugin();
-// const linkifyPlugin = createLinkifyPlugin();
 
 // Inline toolbar
 import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
 const inlineToolbarPlugin = createInlineToolbarPlugin();
 const { InlineToolbar } = inlineToolbarPlugin;
 
-const plugins = [
-  inlineToolbarPlugin,
-  // hashtagPlugin,
-  // linkifyPlugin,
-];
+const plugins = [inlineToolbarPlugin];
 
 const GlobalDraftJSStyle = createGlobalStyle`
   .public-DraftEditor-content {
@@ -56,7 +47,7 @@ const GlobalDraftJSStyle = createGlobalStyle`
 const Wrapper = styled.div`
   box-sizing: border-box;
   cursor: text;
-  margin-bottom: 2em;
+  margin-bottom: 100px;
 `;
 
 export default class DraftJSEditor extends Component {
@@ -80,6 +71,10 @@ export default class DraftJSEditor extends Component {
     this.setState({
       editorState,
     });
+
+    if (props.onChange) {
+      props.onChange(editorState);
+    }
   };
 
   render() {
