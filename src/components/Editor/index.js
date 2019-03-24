@@ -18,31 +18,51 @@ const Wrapper = styled.div`
 export default class DraftJSEditor extends Component {
   constructor(props) {
     super(props);
-    this.state = { editorState: createEditorStateWithText(defaultText) };
-    this.onChange = (editorState) => this.setState({ editorState });
-    this.handleKeyCommand = this.handleKeyCommand.bind(this);
+    const { rawContent, contentState } = props;
+
+    if (!contentState) {
+      // console.log('DraftJSEditor::contructor() with rawContent');
+      this.state = {
+        editorState: createEditorStateWithText(rawContent),
+      };
+    } else if (contentState) {
+      // console.log('DraftJSEditor::contructor() with contentState');
+      this.state = {
+        editorState: EditorState.createWithContent(convertFromRaw(contentState)),
+      };
+    } else {
+      // console.log('DraftJSEditor::contructor() with default text');
+      this.state = { editorState: createEditorStateWithText(defaultText) };
+    }
   }
 
-  handleKeyCommand(command, editorState) {
+  handleKeyCommand = (command, editorState) => {
     console.log('handleKeyCommand');
+    console.log(convertToRaw(editorState.getCurrentContent()));
+
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
       this.onChange(newState);
       return 'handled';
     }
     return 'not-handled';
-  }
+  };
 
   onChange = (editorState) => {
-    console.log('onChange');
+    const currentContentState = this.state.editorState.getCurrentContent();
+    const newContentState = editorState.getCurrentContent();
 
-    console.log(convertToRaw(editorState));
     this.setState({
       editorState,
     });
 
-    if (props.onChange) {
-      props.onChange(editorState);
+    // Only propagate content changes, not selection changes
+    if (currentContentState !== newContentState) {
+      // There was a change in the content
+      if (this.props.onChange) {
+        const rawState = convertToRaw(newContentState);
+        this.props.onChange(rawState);
+      }
     }
   };
 

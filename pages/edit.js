@@ -107,7 +107,13 @@ const Story = (props) => (
 );
 
 const Page = (props) => {
-  const { dispatch } = props;
+  const { dispatch, id, paper } = props;
+
+  // console.log({ id, paper });
+
+  const onChange = (contentState) => {
+    dispatch.papers.update(id, contentState);
+  };
 
   return (
     <Layout>
@@ -120,12 +126,19 @@ const Page = (props) => {
           <H1>Write your story</H1>
           <Button>Share</Button>
         </Toolbar>
-        <NoSSREditor onChange={console.log} />
+        <NoSSREditor rawContent={paper.content} contentState={paper.contentState} onChange={onChange} />
       </Wrapper>
 
       <Footer>everpaper.io &mdash; Built with &hearts; using IPFS in Berlin and Zurich.</Footer>
     </Layout>
   );
+};
+
+Page.getInitialProps = async ({ query: { id } }) => {
+  console.log({ id });
+  return {
+    id,
+  };
 };
 
 function mapDispatchToProps(dispatch) {
@@ -134,8 +147,10 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-function mapStateToProps(state) {
-  return {};
+function mapStateToProps(state, props) {
+  return {
+    paper: state.papers.list.find((p) => p.id === props.id),
+  };
 }
 
 export default withRematch(store, mapStateToProps, mapDispatchToProps)(Page);

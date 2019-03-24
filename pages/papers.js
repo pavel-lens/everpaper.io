@@ -1,5 +1,8 @@
 import Head from 'next/head';
+import Link from 'next/link';
+import Router from 'next/router';
 import styled from 'styled-components';
+import uuid from 'uuid/v4';
 import store, { withRematch } from '../src/store';
 import * as css from '../shared/css';
 
@@ -52,6 +55,7 @@ const H1 = styled.h1`
 `;
 
 const H3 = styled.h3`
+  cursor: pointer;
   font-family: ${css.primaryFont};
   font-size: 25px;
   margin: 10px 0;
@@ -90,6 +94,7 @@ const Toolbar = styled.div`
 `;
 
 const StoryPreview = styled.div`
+  cursor: pointer;
   font-size: 16px;
   line-height: 24px;
   color: rgba(0, 0, 0, 0.54);
@@ -102,35 +107,39 @@ const StoryFooter = styled.div`
 `;
 
 const StoryWrapper = styled.div`
+  display: block;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px 0;
 `;
 
-const Story = (props) => (
-  <StoryWrapper>
-    <H3>{props.title}</H3>
-    {props.children}
-  </StoryWrapper>
-);
+const Story = (props) => <StoryWrapper {...props}>{props.children}</StoryWrapper>;
 
 const Page = (props) => {
   const { dispatch, papers } = props;
   console.log('Papers:', papers);
 
   const handleAddNewPaper = () => {
+    const id = uuid();
     props.onAddPaper({
-      title: `New paper ${new Date()}`,
-      content: `Today we wrote a new paper at ${new Date()}`,
+      id,
+      title: `New story..`,
+      content: `Start your story..`,
       created: new Date(),
       edited: new Date(),
     });
+
+    // Redirect to new paper
+    Router.push(`/edit?id=${id}`);
   };
 
-  const createStoryId = (title) => title.toLowerCase().replace('', '-');
-
   const storiesNodes = papers.map((p) => (
-    <Story key={createStoryId(p.title)} title={p.title}>
-      <StoryPreview>{p.content}</StoryPreview>
+    <Story key={p.id} title={p.title}>
+      <Link href={`/edit?id=${p.id}`}>
+        <H3>{p.title}</H3>
+      </Link>
+      <Link href={`/edit?id=${p.id}`}>
+        <StoryPreview>{p.content}</StoryPreview>
+      </Link>
       <StoryFooter>Last edited about 1 month ago · 1 min read (40 words) so far</StoryFooter>
     </Story>
   ));
@@ -163,7 +172,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    papers: state.papers.list,
+    papers: state.papers.list.sort((a, b) => b.edited - a.edited),
   };
 }
 
