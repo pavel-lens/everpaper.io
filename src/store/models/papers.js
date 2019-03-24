@@ -8,6 +8,30 @@ export const initialState = {
         'Today we went to park with my wife and our doggie Mia. Both were excited as it was a beautiful autumn day, the sun was shinning and the',
       created: new Date(),
       edited: new Date(),
+      contentState: {
+        blocks: [
+          {
+            key: '68oop',
+            text: 'Saturday at park',
+            type: 'header-one',
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [],
+            data: {},
+          },
+          {
+            key: '5l2pa',
+            text:
+              'Today we went to park with my wife and our doggie Mia. Both were excited as it was a beautiful autumn day, the sun was shinning and the',
+            type: 'unstyled',
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [],
+            data: {},
+          },
+        ],
+        entityMap: {},
+      },
     },
     {
       id: 'fc220818-b2a8-497e-97d0-c93907521e1a',
@@ -15,6 +39,29 @@ export const initialState = {
       content: 'The day started slowly with my usual coffee howoever things soon turned to opposite direction',
       created: new Date(),
       edited: new Date(),
+      contentState: {
+        blocks: [
+          {
+            key: '3vaph',
+            text: 'Intense day at work',
+            type: 'header-one',
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [],
+            data: {},
+          },
+          {
+            key: '30qvv',
+            text: 'The day started slowly with my usual coffee howoever things soon turned to opposite direction',
+            type: 'unstyled',
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [],
+            data: {},
+          },
+        ],
+        entityMap: {},
+      },
     },
     {
       id: 'dd114bfa-7732-48fc-aa43-13af08073a80',
@@ -23,6 +70,30 @@ export const initialState = {
         'Today we went to park with my wife and our doggie Mia. Both were excited as it was a beautiful autumn day, the sun was shinning and the',
       created: new Date(),
       edited: new Date(),
+      contentState: {
+        blocks: [
+          {
+            key: '6cco5',
+            text: 'Afternoon drinks with friends',
+            type: 'header-one',
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [],
+            data: {},
+          },
+          {
+            key: 'acm93',
+            text:
+              'Today we went to park with my wife and our doggie Mia. Both were excited as it was a beautiful autumn day, the sun was shinning and the',
+            type: 'unstyled',
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [],
+            data: {},
+          },
+        ],
+        entityMap: {},
+      },
     },
   ],
 };
