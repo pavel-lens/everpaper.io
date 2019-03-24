@@ -37,9 +37,6 @@ export default class DraftJSEditor extends Component {
   }
 
   handleKeyCommand = (command, editorState) => {
-    console.log('handleKeyCommand');
-    console.log(convertToRaw(editorState.getCurrentContent()));
-
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
       this.onChange(newState);
