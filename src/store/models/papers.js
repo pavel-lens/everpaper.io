@@ -68,12 +68,23 @@ export default {
     },
     update(state, paperId, contentState) {
       const paper = state.list.find((p) => p.id === paperId);
+      const titleBlock = contentState.blocks.find((b) => b.type === 'header-one' || b.type === 'header-two');
+      const previewBlock = contentState.blocks.find((b) => b.type === 'unstyled');
+
+      const title = titleBlock ? titleBlock.text : paper.title;
+      const preview = previewBlock.text ? previewBlock.text : paper.content;
+
+      console.log('title', title);
+      console.log('preview', preview);
+
       return {
         ...state,
         list: [
           ...state.list.filter((p) => p.id !== paperId),
           {
             ...paper,
+            title: title || paper.title,
+            content: preview || paper.content,
             edited: new Date(),
             contentState,
           },
