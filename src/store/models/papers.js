@@ -71,8 +71,8 @@ export default {
       const titleBlock = contentState.blocks.find((b) => b.type === 'header-one' || b.type === 'header-two');
       const previewBlock = contentState.blocks.find((b) => b.type === 'unstyled');
 
-      const title = titleBlock ? titleBlock.text : paper.title;
-      const preview = previewBlock.text ? previewBlock.text : paper.content;
+      const title = titleBlock ? titleBlock.text : '(no title)';
+      const preview = previewBlock ? previewBlock.text : paper.content;
 
       console.log('title', title);
       console.log('preview', preview);
