@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import styled from 'styled-components';
 import uuid from 'uuid/v4';
-import store, { withRematch } from '../src/store';
+import store, { withRematch } from 'store';
 import * as css from '../shared/css';
 
 const Layout = styled.div`

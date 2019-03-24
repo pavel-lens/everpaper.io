@@ -1,9 +1,9 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import styled from 'styled-components';
-import store, { withRematch } from '../src/store';
-import dynamic from 'next/dynamic';
-const NoSSREditor = dynamic(() => import('../src/components/Editor'), { ssr: false });
-// import Editor from '../src/components/Editor';
+import store, { withRematch } from 'store';
+const NoSSREditor = dynamic(() => import('components/Editor'), { ssr: false });
+// import Editor from 'components/Editor';
 
 // import '../node_modules/draft-js/dist/Draft.css';
 import * as css from '../shared/css';

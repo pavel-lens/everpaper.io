@@ -1,8 +1,8 @@
 // import { Provider } from 'react-redux';
 import App, { Container } from 'next/app';
 // import withRedux from 'next-redux-wrapper';
-// import createStore from '../src/store/create-store';
-// import createStore from '../src/store/index';
+// import createStore from 'store/create-store';
+// import createStore from 'store/index';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
