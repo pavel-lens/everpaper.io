@@ -27,13 +27,43 @@ export const initialState = {
   ],
 };
 
+const newPaperContentState = {
+  blocks: [
+    {
+      key: '82prq',
+      text: 'Title title..',
+      type: 'header-one',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    },
+    {
+      key: '6bqf',
+      text: 'Write down your thoughts.',
+      type: 'unstyled',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    },
+  ],
+  entityMap: {},
+};
+
 export default {
   state: initialState, // initial state
   reducers: {
     addPaper(state, paper) {
       return {
         ...state,
-        list: [...state.list, paper],
+        list: [
+          ...state.list,
+          {
+            ...paper,
+            contentState: newPaperContentState,
+          },
+        ],
       };
     },
     update(state, paperId, contentState) {
