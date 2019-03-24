@@ -1,5 +1,4 @@
 import { init } from '@rematch/core';
-// import { combineReducers } from 'redux';
 import _withRematch from './withRematch';
 
 import papers from './models/papers';
